@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 2;
     public float jumpDetectDistance = 1;
 
+    CinemachinePositionComposer cineCam;
+    Camera playerCam;
     Ray jumpRay;
     PlayerInput playerInput;
     Rigidbody rb;
@@ -21,11 +24,23 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
 
+        // Initialize Camera
+        playerCam = Camera.main;
+        cineCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachinePositionComposer>();
+
         // Set up new move vector
         moveInput = Vector2.zero;
 
         jumpRay = new Ray(transform.position, -transform.up);
         
+    }
+
+    private void FixedUpdate()
+    {
+        Quaternion playerRotation = Quaternion.identity;
+        playerRotation.y = playerCam.transform.rotation.y;
+        playerRotation.w = playerCam.transform.rotation.w;
+        transform.rotation = playerRotation;
     }
 
     // Update is called once per frame
@@ -40,7 +55,9 @@ public class PlayerController : MonoBehaviour
         tempMove.z = (moveInput.y * speed) * transform.forward.z;
 
 
-        rb.linearVelocity = tempMove; 
+        rb.linearVelocity = (tempMove.x * transform.right) +
+                            (tempMove.y * transform.up) +
+                            (tempMove.z * transform.forward); 
     }
 
     // Read context of input
@@ -56,5 +73,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
         }
+    }
+
+    public void shoulderSwap()
+    {
+        cineCam.TargetOffset.x *= -1;
     }
 }
