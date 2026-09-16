@@ -51,9 +51,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 tempMove = rb.linearVelocity;
 
-        tempMove.x = (moveInput.x * speed) * transform.right.x;
-        tempMove.z = (moveInput.y * speed) * transform.forward.z;
-
+        // Make tempMove = speed. Speed = 5
+        tempMove.x = (moveInput.x * speed);
+        tempMove.z = (moveInput.y * speed);
 
         rb.linearVelocity = (tempMove.x * transform.right) +
                             (tempMove.y * transform.up) +
