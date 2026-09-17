@@ -5,15 +5,26 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
+    public bool isAttacking = false;
+
     public float speed = 5.0f;
     public float jumpHeight = 2;
     public float jumpDetectDistance = 1;
+    public float interactDistance = 6;
 
     CinemachinePositionComposer cineCam;
     Camera playerCam;
-    Ray jumpRay;
     PlayerInput playerInput;
     Rigidbody rb;
+
+    Ray jumpRay;
+    Ray interactRay;
+    RaycastHit interactHit;
+
+    // Items
+    public Weapon currentWeapon;
+    public Transform weaponSlot;
+    public GameObject pickupObj;
 
     Vector2 moveInput;
 
@@ -32,6 +43,9 @@ public class PlayerController : MonoBehaviour
         moveInput = Vector2.zero;
 
         jumpRay = new Ray(transform.position, -transform.up);
+        interactRay = new Ray(playerCam.transform.position, transform.forward);
+
+        weaponSlot = transform.GetChild(0);
         
     }
 
@@ -46,10 +60,28 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        jumpRay.origin = transform.position;
-        jumpRay.direction = -transform.up;
+        jumpRay.origin = transform.position; // set origin
+        jumpRay.direction = -transform.up; // set where ray is looking
 
-        Vector3 tempMove = rb.linearVelocity;
+        interactRay.origin = playerCam.transform.position;
+        interactRay.direction = playerCam.transform.forward;
+
+        if (Physics.Raycast(interactRay, out interactHit, interactDistance)) // send output to interactHit
+        {
+            if (interactHit.collider.tag == "Weapon")
+            {
+                pickupObj = interactHit.collider.gameObject;
+            }
+        }
+        else
+            pickupObj = null;
+
+        // Checks if button is being held down every frame, hence why it is in update.
+        if (currentWeapon)
+            if (currentWeapon.holdToAttack && isAttacking)
+                currentWeapon.fire();
+
+            Vector3 tempMove = rb.linearVelocity;
 
         // Make tempMove = speed. Speed = 5
         tempMove.x = (moveInput.x * speed);
@@ -78,5 +110,39 @@ public class PlayerController : MonoBehaviour
     public void shoulderSwap()
     {
         cineCam.TargetOffset.x *= -1;
+    }
+
+    public void Reload()
+    {
+        if (currentWeapon)
+            if (currentWeapon.isReloading)
+                currentWeapon.reload();
+    }
+
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if(currentWeapon)
+        {
+            if (currentWeapon.holdToAttack)
+            {
+                if (context.ReadValueAsButton())
+                    isAttacking = true;
+                else
+                    isAttacking = false;
+            }
+
+            else if (context.ReadValueAsButton())
+                currentWeapon.fire();
+        }
+    }
+
+    public void Interact()
+    {
+
+    }
+
+    public void DropWeapon()
+    {
+
     }
 }
