@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,11 +7,14 @@ public class PlayerController : MonoBehaviour
 {
 
     public bool isAttacking = false;
+    public bool tookDamage = false;
 
+    public int health = 100;
     public float speed = 5.0f;
     public float jumpHeight = 2;
     public float jumpDetectDistance = 1;
     public float interactDistance = 6;
+    public float dmgCooldown = 3;
 
     CinemachinePositionComposer cineCam;
     Camera playerCam;
@@ -60,8 +64,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        jumpRay.origin = transform.position; // set origin
-        jumpRay.direction = -transform.up; // set where ray is looking
+        //if(health <=0)
+            // die
+        
+        // Ray Setups
+        jumpRay.origin = transform.position;
+        jumpRay.direction = -transform.up;
 
         interactRay.origin = playerCam.transform.position;
         interactRay.direction = playerCam.transform.forward;
@@ -92,7 +100,7 @@ public class PlayerController : MonoBehaviour
                             (tempMove.z * transform.forward); 
     }
 
-    // Read context of input
+// INPUT ACTIONS
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -115,7 +123,7 @@ public class PlayerController : MonoBehaviour
     public void Reload()
     {
         if (currentWeapon)
-            if (currentWeapon.isReloading)
+            if (!currentWeapon.isReloading)
                 currentWeapon.reload();
     }
 
@@ -136,13 +144,88 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Interact()
+    public void Interact(InputAction.CallbackContext context)
     {
-
+        if (context.ReadValueAsButton())
+        {
+            if (pickupObj)
+            {
+                if (pickupObj.tag == "Weapon")
+                {
+                    pickupObj.GetComponent<Weapon>().equip(this); // gives playercontroller reference to equip func
+                }
+            }
+        }
+        else if (currentWeapon) // reload if not looking at obj, works for controller but creates two reload keys for keyboard
+            Reload();
     }
 
     public void DropWeapon()
     {
+        if(currentWeapon)
+            currentWeapon.unequip();
+    }
 
+
+    // Ammo Refill
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ammo")
+        {
+
+            if(currentWeapon && currentWeapon.ammo < currentWeapon.maxAmmo)
+            {
+                // most amount of ammo that can be refilled
+                int ammoFill = currentWeapon.maxAmmo - currentWeapon.ammo;
+
+                if (ammoFill < currentWeapon.ammoRefill)
+                {
+                    currentWeapon.ammo += ammoFill;
+                }
+                else
+                {
+                    currentWeapon.ammo += currentWeapon.ammoRefill;
+                }
+
+                Destroy(collision.gameObject);
+            }
+        }
+
+        // Take Damage
+        if(collision.gameObject.tag == "Hazard")
+        {
+            health -= 10;
+        }
+    }
+
+
+    // HEALTH SYSTEM
+    private void OnCollisionStay(Collision collision)  // runs every frame when physics are updated
+    {
+        if (tookDamage)
+            StartCoroutine("damageCooldown");
+    }
+
+    IEnumerator damageCooldown()
+    {
+        tookDamage = true;
+
+        yield return new WaitForSeconds(dmgCooldown);
+
+            health -= 10;
+
+        tookDamage = false;
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.tag == "Hazard")
+        {
+            if (tookDamage)
+            {
+                StopCoroutine("damageCooldown");
+                tookDamage = false;
+            }
+        }
     }
 }

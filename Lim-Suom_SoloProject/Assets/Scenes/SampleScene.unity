@@ -1103,7 +1103,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.550001, y: 4.519993, z: -82.7271}
+  m_LocalPosition: {x: -14.55, y: 4.52, z: -82.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2306,11 +2306,35 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011658918}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011658918}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -2422,9 +2446,37 @@ MonoBehaviour:
     m_ActionId: fdd3857c-3b6d-4181-9647-9959ffd7b03b
     m_ActionName: 'Player/Swap Shoulder[/Keyboard/z]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1011658918}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c62d21c3-5da5-473e-bf03-a43a3145a7a9
     m_ActionName: 'Player/Reload[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1011658918}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DropWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 84f4f753-d123-4401-be42-abd97bc6abc0
+    m_ActionName: 'Player/Drop Weapon[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2443,12 +2495,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   isAttacking: 0
+  tookDamage: 0
+  health: 100
   speed: 5
   jumpHeight: 2
   jumpDetectDistance: 1
-  interactDistance: 6
+  interactDistance: 15
+  dmgCooldown: 3
   currentWeapon: {fileID: 0}
-  weaponSlot: {fileID: 0}
+  weaponSlot: {fileID: 1011201578}
   pickupObj: {fileID: 0}
 --- !u!1 &1032600899
 GameObject:
@@ -2722,10 +2777,10 @@ MonoBehaviour:
   fireModes: 0
   currentFiremode: 0
   mag: 17
-  magSize: 17
+  magSize: 85
   ammo: 170
   maxAmmo: 1700
-  ammoRefill: 17
+  ammoRefill: 85
 --- !u!54 &1082726658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3775,7 +3830,7 @@ Transform:
   m_GameObject: {fileID: 1755862512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.55, y: 4.52, z: -83.05}
+  m_LocalPosition: {x: -14.55, y: 4.52, z: -82.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3827,7 +3882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePositionComposer
-  CameraDistance: 7
+  CameraDistance: 6
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -3868,7 +3923,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-        Gain: 15
+        Gain: 20
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -3879,7 +3934,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-        Gain: -15
+        Gain: -20
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -3911,7 +3966,7 @@ MonoBehaviour:
     Enabled: 1
     DistanceLimit: 0
     MinimumOcclusionTime: 0
-    CameraRadius: 0.1
+    CameraRadius: 0.2
     UseFollowTarget:
       Enabled: 0
       YOffset: 0
@@ -4663,6 +4718,120 @@ Transform:
   - {fileID: 1315782281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2625609960403979095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -51.6809
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457547471528307567, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6267572784807771600, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+      propertyPath: m_Name
+      value: Ammo Pickup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4383c307bc4b91f4d962716962cec409, type: 3}
+--- !u!1001 &6242143708439259124
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 25985594775817853, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_Name
+      value: Hazard Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.76773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -51.83422
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401911840994642809, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8703075bc99697488ec1b9928b752fa, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4674,3 +4843,5 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1082726662}
+  - {fileID: 2625609960403979095}
+  - {fileID: 6242143708439259124}

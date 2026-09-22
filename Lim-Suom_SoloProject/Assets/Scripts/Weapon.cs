@@ -39,8 +39,10 @@ public class Weapon : MonoBehaviour
         fireDirection = Camera.main;
     }
 
-    public void equip()
+    public void equip(PlayerController p)
     {
+        player = p;
+
         player.currentWeapon = this;
 
         transform.SetPositionAndRotation(player.weaponSlot.position, player.weaponSlot.rotation);
