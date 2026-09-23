@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 205928512}
   - component: {fileID: 205928511}
   m_Layer: 5
-  m_Name: Ammo
+  m_Name: AmmoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,7 +1029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1665.4595, y: -998.48785}
+  m_AnchoredPosition: {x: -1726.659, y: -998.48785}
   m_SizeDelta: {x: 349.865, y: 45.837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &205928511
@@ -1612,6 +1612,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02850023481ff294b93f5fb77024bcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  player: {fileID: 0}
+  weaponName: {fileID: 0}
+  magText: {fileID: 0}
+  ammoText: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,6 +2929,7 @@ MonoBehaviour:
   isAttacking: 0
   tookDamage: 0
   health: 100
+  maxHealth: 100
   speed: 5
   jumpHeight: 2
   jumpDetectDistance: 1
@@ -3313,7 +3319,7 @@ MonoBehaviour:
   fireModes: 0
   currentFiremode: 0
   mag: 17
-  magSize: 85
+  magSize: 17
   ammo: 170
   maxAmmo: 1700
   ammoRefill: 85
@@ -4828,7 +4834,7 @@ GameObject:
   - component: {fileID: 1953860121}
   - component: {fileID: 1953860120}
   m_Layer: 5
-  m_Name: Mag
+  m_Name: MagText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4850,7 +4856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1594.6594, y: -910.2879}
+  m_AnchoredPosition: {x: -1726.659, y: -910.2879}
   m_SizeDelta: {x: 349.865, y: 45.837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953860120
