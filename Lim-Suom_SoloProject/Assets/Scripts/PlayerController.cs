@@ -6,6 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
+    /* Bugs:
+     * Need to rework interactRay because its margainally hard to grab a weapon
+     * Player can do a tinier jump after releasing the spacebar, it reads any single input from the spacebar
+     */
+
     public bool isAttacking = false;
     public bool tookDamage = false;
 
@@ -15,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 2;
     public float jumpDetectDistance = 1;
     public float interactDistance = 6;
-    public float dmgCooldown = 3;
+    public float iFrameLength = 1;
 
     CinemachinePositionComposer cineCam;
     Camera playerCam;
@@ -51,6 +56,9 @@ public class PlayerController : MonoBehaviour
         interactRay = new Ray(playerCam.transform.position, transform.forward);
 
         weaponSlot = transform.GetChild(0);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         
     }
 
@@ -192,7 +200,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Take Damage
+        // Take Damage from a Hazard
         if(collision.gameObject.tag == "Hazard")
         {
             health -= 10;
@@ -203,17 +211,25 @@ public class PlayerController : MonoBehaviour
     // HEALTH SYSTEM
     private void OnCollisionStay(Collision collision)  // runs every frame when physics are updated
     {
-        if (tookDamage)
-            StartCoroutine("damageCooldown");
+        if (collision.gameObject.tag == "Hazard" && !tookDamage)
+        {
+            tookDamage = true;
+            StartCoroutine("iFrames");
+        }
+
+        if (collision.gameObject.tag == "Enemy" && !tookDamage)
+        {
+            tookDamage = true;
+            StartCoroutine("iFrames");
+        }
     }
 
-    IEnumerator damageCooldown()
+    IEnumerator iFrames()
     {
         tookDamage = true;
 
-        yield return new WaitForSeconds(dmgCooldown);
-
-            health -= 10;
+        yield return new WaitForSeconds(iFrameLength);
+    //    health--;
 
         tookDamage = false;
     }
@@ -224,7 +240,7 @@ public class PlayerController : MonoBehaviour
         {
             if (tookDamage)
             {
-                StopCoroutine("damageCooldown");
+                StopCoroutine("iFrames");
                 tookDamage = false;
             }
         }

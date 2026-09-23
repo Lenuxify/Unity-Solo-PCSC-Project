@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         magText = GameObject.Find("MagText").GetComponent<TextMeshProUGUI>();
         ammoText = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
 
-        healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
+        healthBar = GameObject.Find("CurrentHealth").GetComponent<Image>();
     }
 
     void Update()

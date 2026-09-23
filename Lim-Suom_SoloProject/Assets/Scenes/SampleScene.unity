@@ -119,6 +119,70 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &86223323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 86223325}
+  - component: {fileID: 86223324}
+  m_Layer: 0
+  m_Name: NavMesh Surface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &86223324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86223323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 3bf8a807f768af248857cec7cf8a44f9, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &86223325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86223323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -240.75638, y: 1, z: -41.91654}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86934805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,6 +1362,7 @@ GameObject:
   - component: {fileID: 308085036}
   - component: {fileID: 308085035}
   - component: {fileID: 308085034}
+  - component: {fileID: 308085037}
   m_Layer: 0
   m_Name: Ramp (4)
   m_TagString: Untagged
@@ -1398,6 +1463,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308085032}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &308085037
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308085032}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1567,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -259.8, y: 4.52, z: -82.05}
+  m_LocalPosition: {x: -259.8, y: 9.77, z: -82.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2192,6 +2273,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730071735}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &793526843
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -240.51106
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9819093
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -37.862534
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836692912554137134, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8224026836295495147, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
+      propertyPath: m_Name
+      value: Basic Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: feb1f9e4ad7681343a655774a3ae946c, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,7 +2822,7 @@ Transform:
   m_GameObject: {fileID: 1011658911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -260.55, y: 3.52, z: -76.05}
+  m_LocalPosition: {x: -260.55, y: 8.77, z: -76.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2934,7 +3072,7 @@ MonoBehaviour:
   jumpHeight: 2
   jumpDetectDistance: 1
   interactDistance: 15
-  dmgCooldown: 3
+  iFrameLength: 1
   currentWeapon: {fileID: 0}
   weaponSlot: {fileID: 1011201578}
   pickupObj: {fileID: 0}
@@ -3059,6 +3197,7 @@ GameObject:
   - component: {fileID: 1032600903}
   - component: {fileID: 1032600902}
   - component: {fileID: 1032600901}
+  - component: {fileID: 1032600904}
   m_Layer: 0
   m_Name: Ramp (3)
   m_TagString: Untagged
@@ -3159,6 +3298,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032600899}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &1032600904
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032600899}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1075931588
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,7 +3592,7 @@ Transform:
   m_GameObject: {fileID: 1082726656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -255.80566, y: 1.733, z: -74.09064}
+  m_LocalPosition: {x: -255.80566, y: 6.9830008, z: -74.09064}
   m_LocalScale: {x: 0.18238463, y: 0.22112, z: 0.8770649}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4056,6 +4211,7 @@ GameObject:
   - component: {fileID: 1706500053}
   - component: {fileID: 1706500052}
   - component: {fileID: 1706500051}
+  - component: {fileID: 1706500054}
   m_Layer: 0
   m_Name: Ramp (1)
   m_TagString: Untagged
@@ -4156,6 +4312,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706500049}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &1706500054
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706500049}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1745170191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,7 +4544,7 @@ Transform:
   m_GameObject: {fileID: 1755862512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -259.8, y: 4.52, z: -82.05}
+  m_LocalPosition: {x: -259.8, y: 9.77, z: -82.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5338,6 +5510,7 @@ GameObject:
   - component: {fileID: 2093393535}
   - component: {fileID: 2093393534}
   - component: {fileID: 2093393533}
+  - component: {fileID: 2093393536}
   m_Layer: 0
   m_Name: Ramp (2)
   m_TagString: Untagged
@@ -5438,6 +5611,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093393531}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!208 &2093393536
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093393531}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2117958159
 GameObject:
   m_ObjectHideFlags: 0
@@ -5728,6 +5917,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
+  - {fileID: 365797596}
+  - {fileID: 1015447339}
+  - {fileID: 86223325}
   - {fileID: 2135117453}
   - {fileID: 1011658916}
   - {fileID: 1755862514}
@@ -5736,5 +5928,4 @@ SceneRoots:
   - {fileID: 1082726662}
   - {fileID: 2625609960403979095}
   - {fileID: 6242143708439259124}
-  - {fileID: 1015447339}
-  - {fileID: 365797596}
+  - {fileID: 793526843}
