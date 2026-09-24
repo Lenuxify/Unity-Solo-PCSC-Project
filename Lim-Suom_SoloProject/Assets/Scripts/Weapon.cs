@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour
     public float projVelocity;
     public float reloadCooldown;
     public float rof;
+    public int damage;
     public int fireModes;
     public int currentFiremode;
     public int mag;

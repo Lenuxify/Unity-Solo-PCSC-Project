@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,8 @@ public class PlayerController : MonoBehaviour
      */
 
     public bool isAttacking = false;
-    public bool tookDamage = false;
+    public bool tookHazardDamage = false;
+    public bool tookEnemyDamage = false;
 
     public int health = 100;
     public int maxHealth = 100;
@@ -31,10 +33,11 @@ public class PlayerController : MonoBehaviour
     Ray interactRay;
     RaycastHit interactHit;
 
-    // Items
+    // Other Classes
     public Weapon currentWeapon;
     public Transform weaponSlot;
     public GameObject pickupObj;
+    public Enemy enemy;
 
     Vector2 moveInput;
 
@@ -200,49 +203,67 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Take Damage from a Hazard
+        // Take Damage from a Hazard on collision
+            // Hazards for this game will do a flat 10 damage.
         if(collision.gameObject.tag == "Hazard")
         {
-            health -= 10;
+            if(!tookHazardDamage)
+                health -= 10;
+        }
+
+        
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (!tookEnemyDamage)
+                health -= collision.gameObject.GetComponent<Enemy>().damageDealt;
         }
     }
 
 
-    // HEALTH SYSTEM
+    // DAMAGE SYSTEM
+
+    // If player stays colliding:
     private void OnCollisionStay(Collision collision)  // runs every frame when physics are updated
     {
-        if (collision.gameObject.tag == "Hazard" && !tookDamage)
+        if (collision.gameObject.tag == "Hazard" && !tookHazardDamage)
         {
-            tookDamage = true;
-            StartCoroutine("iFrames");
+            tookHazardDamage = true;
+            StartCoroutine("HazardDamageCooldown");
         }
 
-        if (collision.gameObject.tag == "Enemy" && !tookDamage)
+        if (collision.gameObject.tag == "Enemy" && !tookEnemyDamage)
         {
-            tookDamage = true;
-            StartCoroutine("iFrames");
+            tookEnemyDamage = true;
+            StartCoroutine("EnemyDamageCooldown");
         }
     }
 
-    IEnumerator iFrames()
+    IEnumerator HazardDamageCooldown()
     {
-        tookDamage = true;
+        tookHazardDamage = true;
 
         yield return new WaitForSeconds(iFrameLength);
-    //    health--;
+        health -= 10;
+        tookHazardDamage = false;
+    }
 
-        tookDamage = false;
+    IEnumerator EnemyDamageCooldown()
+    {
+        tookEnemyDamage = true;
+
+        yield return new WaitForSeconds(iFrameLength);
+        tookEnemyDamage = false;
     }
 
     public void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Hazard")
         {
-            if (tookDamage)
+            if (tookHazardDamage)
             {
-                StopCoroutine("iFrames");
-                tookDamage = false;
+                StopCoroutine("HazardDamageCooldown");
+                tookHazardDamage = false;
             }
-        }
+        }     
     }
 }

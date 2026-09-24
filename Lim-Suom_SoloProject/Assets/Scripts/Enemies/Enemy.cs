@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 2;
 
     public PlayerController player;
+    public Weapon weapon;
     public NavMeshAgent agent;
 
     void Start()
@@ -27,9 +28,11 @@ public class Enemy : MonoBehaviour
     
     void Update()
     {
+        if(health <= 0)
+            Destroy(gameObject);
+
         // Find difference between player position and enemy position
         float targetDistance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
-        // float trackDistance = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
 
         isFollowing = targetDistance <= detectionRange;
 
@@ -43,17 +46,19 @@ public class Enemy : MonoBehaviour
     // If collides with player, deal damage. Then, start the attack cooldown right after.
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player" && hasAttacked == false)
+        // If player hasn't took enemy damage and the enemy is off cooldown, deal damage.
+        if (collision.gameObject.tag == "Player" && hasAttacked == false && player.tookEnemyDamage == false)
         {
-            player.health -= damageDealt;
             hasAttacked = true;
-
             StartCoroutine("enemyAttackCooldown");
         }
         else
         {
             // back away?
         }
+
+       // if (collision.gameObject.tag == "Projectile")
+        //    health -= weapon.damage;
     }
 
     // If the enemy has attacked, wait for enemy's attack cooldown. Then, allow them to attack again.
@@ -62,9 +67,6 @@ public class Enemy : MonoBehaviour
         if(hasAttacked == true)
         {
             yield return new WaitForSeconds(attackCooldown);
-
-            //player.health -= damageDealt;
-
             hasAttacked = false;
         }
     }
