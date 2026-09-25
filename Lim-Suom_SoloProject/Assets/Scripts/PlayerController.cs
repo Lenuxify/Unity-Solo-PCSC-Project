@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking = false;
     public bool tookHazardDamage = false;
     public bool tookEnemyDamage = false;
+    public bool canTakeEnemyDamage = false;
 
     public int health = 100;
     public int maxHealth = 100;
@@ -211,12 +212,14 @@ public class PlayerController : MonoBehaviour
                 health -= 10;
         }
 
-        
+        /*
         if (collision.gameObject.tag == "Enemy")
         {
             if (!tookEnemyDamage)
                 health -= collision.gameObject.GetComponent<Enemy>().damageDealt;
+                health -= collision.gameObject.GetComponent<Charger>().damageDealt;
         }
+        */
     }
 
 
@@ -233,8 +236,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy" && !tookEnemyDamage)
         {
-            tookEnemyDamage = true;
-            StartCoroutine("EnemyDamageCooldown");
+                StartCoroutine("EnemyDamageCooldown");
         }
     }
 
@@ -252,6 +254,7 @@ public class PlayerController : MonoBehaviour
         tookEnemyDamage = true;
 
         yield return new WaitForSeconds(iFrameLength);
+        health -= gameObject.GetComponent<Enemy>().damageDealt;
         tookEnemyDamage = false;
     }
 

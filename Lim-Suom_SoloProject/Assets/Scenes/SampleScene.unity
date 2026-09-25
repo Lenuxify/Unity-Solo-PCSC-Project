@@ -1840,8 +1840,8 @@ GameObject:
   - component: {fileID: 466951265}
   - component: {fileID: 466951264}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Charger Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1861,12 +1861,11 @@ MonoBehaviour:
   isFollowing: 0
   hasAttacked: 0
   health: 50
-  maxHealth: 25
-  damageDealt: 15
+  maxHealth: 50
+  damageDealt: 30
   detectionRange: 15
   attackCooldown: 2
   player: {fileID: 0}
-  weapon: {fileID: 0}
   agent: {fileID: 0}
 --- !u!195 &466951265
 NavMeshAgent:
@@ -3241,6 +3240,7 @@ MonoBehaviour:
   isAttacking: 0
   tookHazardDamage: 0
   tookEnemyDamage: 0
+  canTakeEnemyDamage: 1
   health: 100
   maxHealth: 100
   speed: 5

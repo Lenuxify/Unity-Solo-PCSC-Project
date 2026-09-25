@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 2;
 
     public PlayerController player;
-    public Weapon weapon;
     public NavMeshAgent agent;
 
     void Start()
@@ -49,6 +48,7 @@ public class Enemy : MonoBehaviour
         // If player hasn't took enemy damage and the enemy is off cooldown, deal damage.
         if (collision.gameObject.tag == "Player" && hasAttacked == false && player.tookEnemyDamage == false)
         {
+            player.health -= damageDealt;
             hasAttacked = true;
             StartCoroutine("enemyAttackCooldown");
         }
@@ -57,8 +57,13 @@ public class Enemy : MonoBehaviour
             // back away?
         }
 
-       // if (collision.gameObject.tag == "Projectile")
-        //    health -= weapon.damage;
+        // Take damage equal to player's current weapon's damage
+        if (collision.gameObject.tag == "Projectile")
+            health -= player.currentWeapon.damage;
+
+        // taking dmg from other enemies prototype (obviously not gonna work yet)
+        //if (collision.gameObject.tag == "enemyProjectile")
+        //    health -= enemy.currentWeapon.damage - 5;
     }
 
     // If the enemy has attacked, wait for enemy's attack cooldown. Then, allow them to attack again.
