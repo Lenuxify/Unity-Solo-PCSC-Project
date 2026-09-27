@@ -7,4 +7,12 @@ public class Charger : Enemy
     {
         damageDealt = 30;
     }
+
+    // explode after touching player
+    public new void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (collision.gameObject.tag == "Player")
+            Destroy(gameObject);
+    }
 }

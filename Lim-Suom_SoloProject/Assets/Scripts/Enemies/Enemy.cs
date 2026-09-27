@@ -48,7 +48,6 @@ public class Enemy : MonoBehaviour
         // If player hasn't took enemy damage and the enemy is off cooldown, deal damage.
         if (collision.gameObject.tag == "Player" && hasAttacked == false && player.tookEnemyDamage == false)
         {
-            player.health -= damageDealt;
             hasAttacked = true;
             StartCoroutine("enemyAttackCooldown");
         }

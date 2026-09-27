@@ -12,15 +12,23 @@ public class PlayerController : MonoBehaviour
      * Player can do a tinier jump after releasing the spacebar, it reads any single input from the spacebar
      */
 
+    [Header("Booleans")]
     public bool isAttacking = false;
     public bool tookHazardDamage = false;
     public bool tookEnemyDamage = false;
     public bool canTakeEnemyDamage = false;
 
+    [Header("Enemy Relationships")]
+    // track last damage taken from enemy damage. crucial for onCollisionStay damage.
+    public int enemyDamage;
+
+    [Header("Player Stats")]
     public int health = 100;
     public int maxHealth = 100;
     public float speed = 5.0f;
     public float jumpHeight = 2;
+
+    [Header("Other")]
     public float jumpDetectDistance = 1;
     public float interactDistance = 6;
     public float iFrameLength = 1;
@@ -38,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public Weapon currentWeapon;
     public Transform weaponSlot;
     public GameObject pickupObj;
-    public Enemy enemy;
+    private Enemy enemy;
 
     Vector2 moveInput;
 
@@ -48,6 +56,7 @@ public class PlayerController : MonoBehaviour
         // Fetch Components into an variable
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
+
 
         // Initialize Camera
         playerCam = Camera.main;
@@ -212,18 +221,22 @@ public class PlayerController : MonoBehaviour
                 health -= 10;
         }
 
-        /*
-        if (collision.gameObject.tag == "Enemy")
+        // Get base enemy class script then put damageDealt into enemyDamage variable. Then, use the enemyDamage as the damage to take in TakeDamage func
+        if (collision.transform.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            if (!tookEnemyDamage)
-                health -= collision.gameObject.GetComponent<Enemy>().damageDealt;
-                health -= collision.gameObject.GetComponent<Charger>().damageDealt;
+            enemyDamage = enemy.damageDealt;
+            TakeDamage(enemyDamage);
         }
-        */
     }
 
 
     // DAMAGE SYSTEM
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+    }
+
 
     // If player stays colliding:
     private void OnCollisionStay(Collision collision)  // runs every frame when physics are updated
@@ -254,7 +267,7 @@ public class PlayerController : MonoBehaviour
         tookEnemyDamage = true;
 
         yield return new WaitForSeconds(iFrameLength);
-        health -= gameObject.GetComponent<Enemy>().damageDealt;
+        TakeDamage(enemyDamage);
         tookEnemyDamage = false;
     }
 
