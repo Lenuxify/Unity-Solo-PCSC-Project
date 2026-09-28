@@ -42,11 +42,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // If collides with player, deal damage. Then, start the attack cooldown right after.
     public void OnCollisionEnter(Collision collision)
     {
-        // If player hasn't took enemy damage and the enemy is off cooldown, deal damage.
-        if (collision.gameObject.tag == "Player" && hasAttacked == false && player.tookEnemyDamage == false)
+        if (collision.gameObject.tag == "Player" && hasAttacked == false)
         {
             hasAttacked = true;
             StartCoroutine("enemyAttackCooldown");
@@ -60,7 +58,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Projectile")
             health -= player.currentWeapon.damage;
 
-        // taking dmg from other enemies prototype (obviously not gonna work yet)
+        // taking dmg from other enemies projectiles prototype (obviously not gonna work yet)
         //if (collision.gameObject.tag == "enemyProjectile")
         //    health -= enemy.currentWeapon.damage - 5;
     }

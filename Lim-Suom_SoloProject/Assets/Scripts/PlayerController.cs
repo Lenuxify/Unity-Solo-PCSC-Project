@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,11 +18,16 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking = false;
     public bool tookHazardDamage = false;
     public bool tookEnemyDamage = false;
-    public bool canTakeEnemyDamage = false;
+    public bool canTakeEnemyDamage = true;
 
-    [Header("Enemy Relationships")]
+    [Header("Damage Relationships")]
     // track last damage taken from enemy damage. crucial for onCollisionStay damage.
     public int enemyDamage;
+
+    // contactTime is used to check how long something has collided with the player.
+    public float hazardContactTime;
+    public float enemyContactTime;
+    public float damageTime = 1;
 
     [Header("Player Stats")]
     public int health = 100;
@@ -50,7 +57,6 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Fetch Components into an variable
@@ -83,7 +89,6 @@ public class PlayerController : MonoBehaviour
         transform.rotation = playerRotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //if(health <=0)
@@ -129,11 +134,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void Sprint(InputAction.CallbackContext context)
+    {
+            speed = 8.0f;
+    }
+
     public void Jump()
     {
         if(Physics.Raycast(jumpRay, jumpDetectDistance))
         {
-            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+                rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
         }
     }
 
@@ -189,9 +199,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // Ammo Refill
     private void OnCollisionEnter(Collision collision)
     {
+        // Ammo Refill
         if(collision.gameObject.tag == "Ammo")
         {
 
@@ -217,8 +227,8 @@ public class PlayerController : MonoBehaviour
             // Hazards for this game will do a flat 10 damage.
         if(collision.gameObject.tag == "Hazard")
         {
-            if(!tookHazardDamage)
-                health -= 10;
+            if (!tookHazardDamage)
+                TakeDamage(10);
         }
 
         // Get base enemy class script then put damageDealt into enemyDamage variable. Then, use the enemyDamage as the damage to take in TakeDamage func
@@ -239,16 +249,21 @@ public class PlayerController : MonoBehaviour
 
 
     // If player stays colliding:
-    private void OnCollisionStay(Collision collision)  // runs every frame when physics are updated
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Hazard" && !tookHazardDamage)
         {
-            tookHazardDamage = true;
-            StartCoroutine("HazardDamageCooldown");
+            hazardContactTime += Time.deltaTime;
+
+            if (hazardContactTime > damageTime)
+                StartCoroutine("HazardDamageCooldown");
         }
 
         if (collision.gameObject.tag == "Enemy" && !tookEnemyDamage)
         {
+            enemyContactTime += Time.deltaTime;
+
+            if (enemyContactTime > damageTime)
                 StartCoroutine("EnemyDamageCooldown");
         }
     }
@@ -259,6 +274,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(iFrameLength);
         health -= 10;
+        hazardContactTime = 0;
         tookHazardDamage = false;
     }
 
@@ -268,6 +284,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(iFrameLength);
         TakeDamage(enemyDamage);
+        enemyContactTime = 0;
         tookEnemyDamage = false;
     }
 
@@ -275,11 +292,18 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Hazard")
         {
+            /*
             if (tookHazardDamage)
             {
                 StopCoroutine("HazardDamageCooldown");
                 tookHazardDamage = false;
             }
-        }     
+            */
+            hazardContactTime = 0;
+        }
+        if(collision.gameObject.tag == "Enemy")
+        {
+            enemyContactTime = 0;
+        }
     }
 }
