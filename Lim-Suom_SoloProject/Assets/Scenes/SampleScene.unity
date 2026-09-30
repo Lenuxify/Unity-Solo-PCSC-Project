@@ -3081,9 +3081,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   isAttacking: 0
+  canTakeEnemyDamage: 1
   tookHazardDamage: 0
   tookEnemyDamage: 0
-  canTakeEnemyDamage: 1
   enemyDamage: 0
   hazardContactTime: 0
   enemyContactTime: 0
@@ -3091,7 +3091,20 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   speed: 5
+  stamina: 100
+  maxStamina: 100
   jumpHeight: 2
+  toggleSprint: 1
+  canSprint: 1
+  isSprinting: 0
+  sprintStop: 0
+  staminaStop: 0
+  regenStamina: 0
+  sprintBoost: 1.5
+  sprintCooldown: 2
+  staminaRegen: 10
+  staminaCooldown: 2
+  staminaCost: 20
   jumpDetectDistance: 1
   interactDistance: 15
   iFrameLength: 1

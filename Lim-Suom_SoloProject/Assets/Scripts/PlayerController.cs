@@ -11,16 +11,15 @@ public class PlayerController : MonoBehaviour
 
     /* Bugs:
      * Need to rework interactRay because its margainally hard to grab a weapon
-     * Player can do a tinier jump after releasing the spacebar, it reads any single input from the spacebar
+     * Player does a secondary jump after releasing spacebar late
      */
 
-    [Header("Booleans")]
+    [Header("Damage Relationships")]
     public bool isAttacking = false;
+    public bool canTakeEnemyDamage = true;
     public bool tookHazardDamage = false;
     public bool tookEnemyDamage = false;
-    public bool canTakeEnemyDamage = true;
 
-    [Header("Damage Relationships")]
     // track last damage taken from enemy damage. crucial for onCollisionStay damage.
     public int enemyDamage;
 
@@ -33,9 +32,25 @@ public class PlayerController : MonoBehaviour
     public int health = 100;
     public int maxHealth = 100;
     public float speed = 5.0f;
+    public float stamina = 100f;
+    public float maxStamina = 100f;
     public float jumpHeight = 2;
 
+    [Header("Sprint Handling")]
+    public bool toggleSprint = true;
+    public bool canSprint = true;
+    public bool isSprinting = false;
+    public bool sprintStop = false;
+    public bool staminaStop = false;
+    public bool regenStamina = false;
+    public float sprintBoost = 1.5f;
+    public float sprintCooldown = 2;
+    public float staminaRegen = 10;
+    public float staminaCooldown = 2;
+    public float staminaCost = 20f;
+
     [Header("Other")]
+    // Sprint handling
     public float jumpDetectDistance = 1;
     public float interactDistance = 6;
     public float iFrameLength = 1;
@@ -122,6 +137,55 @@ public class PlayerController : MonoBehaviour
         tempMove.x = (moveInput.x * speed);
         tempMove.z = (moveInput.y * speed);
 
+
+        // SPRINTING
+        if(isSprinting)
+        {
+            if(moveInput.y == 1 && stamina > 0)
+            {
+                {
+                    tempMove.z *= sprintBoost;
+                    stamina -= staminaCost * Time.deltaTime;
+
+                    if (stamina < 0)
+                        stamina = 0;
+
+                    StopCoroutine("StaminaReset");
+                }
+            }
+            else
+            {
+                canSprint = false;
+                isSprinting = false;
+                StartCoroutine("StaminaReset");
+            }
+        }
+
+        if(!isSprinting)
+        {
+            if(!regenStamina && !staminaStop && stamina < maxStamina)
+            {
+                StartCoroutine("StaminaReset");
+            }
+            if(!canSprint && !sprintStop)
+            {
+                StartCoroutine("SprintReset");
+            }
+
+            // Regen Stamina
+            if(regenStamina)
+            {
+                stamina += staminaRegen * Time.deltaTime;
+
+                // Prevent stamina overfill
+                if(stamina >= maxStamina)
+                {
+                    stamina = maxStamina;
+                    regenStamina = false;
+                }
+            }
+        }
+
         rb.linearVelocity = (tempMove.x * transform.right) +
                             (tempMove.y * transform.up) +
                             (tempMove.z * transform.forward); 
@@ -136,7 +200,20 @@ public class PlayerController : MonoBehaviour
 
     public void Sprint(InputAction.CallbackContext context)
     {
-            speed = 8.0f;
+        if(canSprint)
+        {
+            if (toggleSprint)
+            {
+                isSprinting = !isSprinting;
+            }
+            else if (!toggleSprint)
+            {
+                isSprinting = context.ReadValueAsButton();
+
+                if (!isSprinting)
+                    canSprint = false;
+            }
+        }
     }
 
     public void Jump()
@@ -268,6 +345,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Hazard")
+        {
+            /*
+            if (tookHazardDamage)
+            {
+                StopCoroutine("HazardDamageCooldown");
+                tookHazardDamage = false;
+            }
+            */
+            hazardContactTime = 0;
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            enemyContactTime = 0;
+        }
+    }
+
+
+    // IEnumerators
     IEnumerator HazardDamageCooldown()
     {
         tookHazardDamage = true;
@@ -288,22 +386,23 @@ public class PlayerController : MonoBehaviour
         tookEnemyDamage = false;
     }
 
-    public void OnCollisionExit(Collision collision)
+    IEnumerator SprintReset()
     {
-        if(collision.gameObject.tag == "Hazard")
-        {
-            /*
-            if (tookHazardDamage)
-            {
-                StopCoroutine("HazardDamageCooldown");
-                tookHazardDamage = false;
-            }
-            */
-            hazardContactTime = 0;
-        }
-        if(collision.gameObject.tag == "Enemy")
-        {
-            enemyContactTime = 0;
-        }
+        sprintStop = true;
+
+        yield return new WaitForSeconds(sprintCooldown);
+
+        canSprint = true;
+        sprintStop = false;
+    }
+
+    IEnumerator StaminaReset()
+    {
+        staminaStop = true;
+
+        yield return new WaitForSeconds(staminaCooldown);
+
+        regenStamina = true;
+        staminaStop = false;
     }
 }
