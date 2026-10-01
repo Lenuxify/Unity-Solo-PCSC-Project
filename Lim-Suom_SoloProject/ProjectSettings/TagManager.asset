@@ -9,6 +9,8 @@ TagManager:
   - Ammo
   - Hazard
   - Enemy
+  - Pause
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -68,15 +69,17 @@ public class PlayerController : MonoBehaviour
     public Weapon currentWeapon;
     public Transform weaponSlot;
     public GameObject pickupObj;
+    public GameManager gameManager;
     private Enemy enemy;
 
     Vector2 moveInput;
 
     void Start()
     {
-        // Fetch Components into an variable
+        // Fetch General Components into an variable
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
 
         // Initialize Camera
@@ -236,6 +239,21 @@ public class PlayerController : MonoBehaviour
                 currentWeapon.reload();
     }
 
+    public void changeFireMode()
+    {
+        if(currentWeapon)
+        {
+            if(currentWeapon.fireModes >= 2)
+            {
+                if(currentWeapon.weaponID ==  1)
+                {
+                    // Call changeFireMode function from Rifle.
+                    currentWeapon.GetComponent<Rifle>().changeFireMode();
+                }
+            }
+        }
+    }
+
     public void Attack(InputAction.CallbackContext context)
     {
         if(currentWeapon)
@@ -313,6 +331,11 @@ public class PlayerController : MonoBehaviour
         {
             enemyDamage = enemy.damageDealt;
             TakeDamage(enemyDamage);
+        }
+
+        if(collision.gameObject.tag == "LevelEnd")
+        {
+            gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
