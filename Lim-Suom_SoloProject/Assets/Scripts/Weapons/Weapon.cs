@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    PlayerController player;
+    public PlayerController player;
 
     public GameObject projectile;
     public Transform firePoint;
@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
     public bool canFire = true;
     public bool holdToAttack = true;
     public bool isReloading = false;
+    public bool Aimable;
+    public bool heavy;
     public int weaponID;
     public string weaponName;
 
@@ -32,8 +34,6 @@ public class Weapon : MonoBehaviour
     public int ammo;
     public int maxAmmo;
     public int ammoRefill;
-
-
 
     void Start()
     {

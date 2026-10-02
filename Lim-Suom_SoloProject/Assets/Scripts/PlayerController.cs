@@ -50,13 +50,18 @@ public class PlayerController : MonoBehaviour
     public float staminaCooldown = 2;
     public float staminaCost = 20f;
 
+    [Header("Weapon Handling")]
+    public int heldWeaponID = -1;
+
     [Header("Other")]
     // Sprint handling
     public float jumpDetectDistance = 1;
     public float interactDistance = 6;
     public float iFrameLength = 1;
+    public float fov;
 
-    CinemachinePositionComposer cineCam;
+    CinemachineCamera cineCam;
+    CinemachinePositionComposer cineCamComposer;
     Camera playerCam;
     PlayerInput playerInput;
     Rigidbody rb;
@@ -84,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
         // Initialize Camera
         playerCam = Camera.main;
-        cineCam = GameObject.Find("CinemachineCamera").GetComponent<CinemachinePositionComposer>();
+        cineCamComposer = GameObject.Find("CinemachineCamera").GetComponent<CinemachinePositionComposer>();
 
         // Set up new move vector
         moveInput = Vector2.zero;
@@ -189,6 +194,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Weapon Slow Debuff. Flat slow down of 20% universally for all heavy weapons. (or until i make a minigun or smth idek)
+        if(currentWeapon)
+            if(currentWeapon.heavy == true)
+            {
+                tempMove.z *= 0.8f;
+            }
+
         rb.linearVelocity = (tempMove.x * transform.right) +
                             (tempMove.y * transform.up) +
                             (tempMove.z * transform.forward); 
@@ -229,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
     public void shoulderSwap()
     {
-        cineCam.TargetOffset.x *= -1;
+        cineCamComposer.TargetOffset.x *= -1;
     }
 
     public void Reload()
@@ -280,6 +292,8 @@ public class PlayerController : MonoBehaviour
                 if (pickupObj.tag == "Weapon")
                 {
                     pickupObj.GetComponent<Weapon>().equip(this); // gives playercontroller reference to equip func
+                    heldWeaponID = currentWeapon.weaponID;
+                    Debug.Log("Weapon ID: " +  heldWeaponID);
                 }
             }
         }
@@ -291,6 +305,15 @@ public class PlayerController : MonoBehaviour
     {
         if(currentWeapon)
             currentWeapon.unequip();
+
+        heldWeaponID = -1;
+    }
+
+    public void Aim(InputAction.CallbackContext context)
+    {
+        if (currentWeapon)
+            if (currentWeapon.Aimable)
+                cineCam.Lens.FieldOfView -= 30;
     }
 
 

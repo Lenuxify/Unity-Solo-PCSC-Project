@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public PlayerController player;
+    public Weapon weapon;
 
     public GameObject pauseMenu;
 
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
 
             healthBar = GameObject.Find("CurrentHealth").GetComponent<Image>();
 
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             pauseMenu.SetActive(false);
 
             enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
@@ -45,43 +49,43 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        /*
-        if(paused)
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            // free le cursor
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            if (paused)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
 
-            Time.timeScale = 0;
+                Time.timeScale = 0;
 
-            pauseMenu.SetActive(true);
-        }
-        else
-        {
-            // prison le cursor
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+                pauseMenu.SetActive(true);
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
 
-            Time.timeScale = 1;
+                Time.timeScale = 1;
 
-            pauseMenu.SetActive(false);
-        }
-        */
+                pauseMenu.SetActive(false);
+            }
 
-        healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
 
-        if (player.currentWeapon)
-        {
-            weaponName.text = player.currentWeapon.name;
-            magText.text = "Mag: " + player.currentWeapon.mag + "/" + player.currentWeapon.magSize;
-            ammoText.text = "Ammo: " + player.currentWeapon.ammo + "/" + player.currentWeapon.maxAmmo;
+            healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
 
-        }
-        else
-        {
-            weaponName.text = "";
-            magText.text = "";
-            ammoText.text = "";
+            if (player.currentWeapon)
+            {
+                weaponName.text = player.currentWeapon.name;
+                magText.text = "Mag: " + player.currentWeapon.mag + "/" + player.currentWeapon.magSize;
+                ammoText.text = "Ammo: " + player.currentWeapon.ammo + "/" + player.currentWeapon.maxAmmo;
+
+            }
+            else
+            {
+                weaponName.text = "";
+                magText.text = "";
+                ammoText.text = "";
+            }
         }
     }
 
@@ -107,7 +111,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int levelID)
     {
-        if (levelID > SceneManager.sceneCount)
+        if (levelID >= SceneManager.sceneCountInBuildSettings)
             Debug.Log("Scene ID too high: " + levelID);
         else
             SceneManager.LoadScene(levelID);
