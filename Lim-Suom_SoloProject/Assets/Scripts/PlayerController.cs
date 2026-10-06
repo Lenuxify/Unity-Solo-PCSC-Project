@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
      */
 
     [Header("Damage Relationships")]
+    public bool isDead = false;
     public bool isAttacking = false;
     public bool canTakeEnemyDamage = true;
     public bool tookHazardDamage = false;
@@ -114,8 +115,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //if(health <=0)
-            // die
+        if (health <= 0)
+            isDead = true;
         
         // Ray Setups
         jumpRay.origin = transform.position;

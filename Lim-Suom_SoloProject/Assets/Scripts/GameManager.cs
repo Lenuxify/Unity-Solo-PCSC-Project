@@ -10,14 +10,17 @@ public class GameManager : MonoBehaviour
     public Weapon weapon;
 
     public GameObject pauseMenu;
+    public GameObject deathScreen;
 
     public TextMeshProUGUI weaponName;
     public TextMeshProUGUI magText;
     public TextMeshProUGUI ammoText;
 
     public Image healthBar;
+    public Image staminaBar;
 
     public int enemyCount = 0;
+    public int currentLevel;
 
     public bool paused = false;
 
@@ -29,19 +32,23 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex != 0)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            currentLevel = SceneManager.GetActiveScene().buildIndex;
 
             pauseMenu = GameObject.FindGameObjectWithTag("Pause");
+            deathScreen = GameObject.FindGameObjectWithTag("Death");
 
             weaponName = GameObject.Find("WeaponName").GetComponent<TextMeshProUGUI>();
             magText = GameObject.Find("MagText").GetComponent<TextMeshProUGUI>();
             ammoText = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
 
             healthBar = GameObject.Find("CurrentHealth").GetComponent<Image>();
+            staminaBar = GameObject.Find("CurrentStamina").GetComponent<Image>();
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
             pauseMenu.SetActive(false);
+            deathScreen.SetActive(false);
 
             enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         }
@@ -51,6 +58,12 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
+            if (player.isDead == true)
+            {
+                deathScreen.SetActive(true);
+                paused = true;
+            }
+
             if (paused)
             {
                 Cursor.visible = true;
@@ -58,7 +71,8 @@ public class GameManager : MonoBehaviour
 
                 Time.timeScale = 0;
 
-                pauseMenu.SetActive(true);
+                if(player.isDead == false)
+                    pauseMenu.SetActive(true);
             }
             else
             {
@@ -72,6 +86,7 @@ public class GameManager : MonoBehaviour
 
 
             healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
+            staminaBar.fillAmount = (float)player.stamina / (float)player.maxStamina;
 
             if (player.currentWeapon)
             {
@@ -115,6 +130,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("Scene ID too high: " + levelID);
         else
             SceneManager.LoadScene(levelID);
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(currentLevel);
     }
 
     public void Quit()
