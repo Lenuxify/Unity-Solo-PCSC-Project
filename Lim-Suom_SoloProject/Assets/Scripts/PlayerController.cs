@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
         if(currentWeapon)
             if(currentWeapon.heavy == true)
             {
-                tempMove.z *= 0.8f;
+                tempMove.z *= 0.75f;
             }
 
         rb.linearVelocity = (tempMove.x * transform.right) +
@@ -305,9 +305,10 @@ public class PlayerController : MonoBehaviour
     public void DropWeapon()
     {
         if(currentWeapon)
+        {
             currentWeapon.unequip();
-
-        heldWeaponID = -1;
+            heldWeaponID = -1;
+        }
     }
 
     public void Aim(InputAction.CallbackContext context)

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Rifle : Weapon
 {
+    // WEAPON ID: 1
+
     [Header("Rifle Exclusive")]
     public float semiAutoROF = 1;
     public float fullAutoROF = 0.1f;
