@@ -115,15 +115,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Switch Weapon",
-                    "type": "Button",
-                    "id": "aa93dc51-fd74-4680-8aea-308834216d8f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Drop Weapon",
                     "type": "Button",
                     "id": "84f4f753-d123-4401-be42-abd97bc6abc0",
@@ -158,6 +149,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom In/Out",
+                    "type": "Value",
+                    "id": "da911c51-ee61-4fac-b11a-a6ed75d75e80",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -329,7 +329,7 @@
                 {
                     "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -377,17 +377,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -570,28 +559,6 @@
                 },
                 {
                     "name": "",
-                    "id": "6459f453-5731-45d9-b1f3-00b638916983",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Switch Weapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c75e26dd-e618-4fc6-b1a7-7e1ded884a48",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Switch Weapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "61f0d0a9-7011-412d-93ad-2ffaef0d6e78",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
@@ -626,7 +593,7 @@
                 {
                     "name": "",
                     "id": "b7ee7339-b2bb-404b-af8f-b0aff57d111e",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -648,10 +615,10 @@
                 {
                     "name": "",
                     "id": "5c11e27a-5e9a-4dac-b83f-1899414ec06d",
-                    "path": "",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "Drop Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -670,7 +637,7 @@
                 {
                     "name": "",
                     "id": "e97b226a-31d2-4405-96e8-36b969cd7daa",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -692,7 +659,7 @@
                 {
                     "name": "",
                     "id": "511ad407-0011-4397-bf61-1a45c5b82542",
-                    "path": "",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -714,11 +681,33 @@
                 {
                     "name": "",
                     "id": "eaf2f6d1-fae3-4a78-b88c-af3ae065cd50",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Scope In",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89ee4b84-8f87-4cdb-9869-5fa3b0036d0b",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Zoom In/Out",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3548be7-c245-474d-9286-8e302b548030",
                     "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scope In",
+                    "action": "Zoom In/Out",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8224026836295495147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -238.48041, y: 2.75, z: -44.983}
+  m_LocalPosition: {x: -240.51106, y: 1.9819093, z: -37.862534}
   m_LocalScale: {x: 0.6134824, y: 1.9638186, z: 0.34521976}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,8 +124,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 100
-  m_Acceleration: 8
+  m_Speed: 10
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1
@@ -148,12 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2b6d97cdf213e4092aa5995d4421f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  data: {fileID: 0}
   isFollowing: 0
   hasAttacked: 0
   health: 25
   maxHealth: 25
-  detectionRange: 5
+  damageDealt: 15
+  detectionRange: 15
   attackCooldown: 2
   player: {fileID: 0}
   agent: {fileID: 0}

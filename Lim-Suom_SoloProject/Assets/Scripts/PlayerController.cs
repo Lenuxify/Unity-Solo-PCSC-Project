@@ -245,6 +245,10 @@ public class PlayerController : MonoBehaviour
         cineCamComposer.TargetOffset.x *= -1;
     }
 
+    //public void zoom(InputAction.CallbackContext context)
+    //{
+    //}
+
     public void Reload()
     {
         if (currentWeapon)
