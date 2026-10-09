@@ -12,6 +12,7 @@ TagManager:
   - Pause
   - LevelEnd
   - Death
+  - Bandage
   layers:
   - Default
   - TransparentFX

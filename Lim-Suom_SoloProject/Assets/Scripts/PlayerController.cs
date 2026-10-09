@@ -51,8 +51,9 @@ public class PlayerController : MonoBehaviour
     public float staminaCooldown = 2;
     public float staminaCost = 20f;
 
-    [Header("Weapon Handling")]
+    [Header("Inventory")]
     public int heldWeaponID = -1;
+    public int heldBandages = 0;
 
     [Header("Other")]
     // Sprint handling
@@ -322,6 +323,18 @@ public class PlayerController : MonoBehaviour
                 cineCam.Lens.FieldOfView -= 30;
     }
 
+    public void Heal()
+    {
+        if (health < 99 && heldBandages > 0)
+        {
+            health += 15;
+            heldBandages--;
+
+            if(health > maxHealth)
+                health = maxHealth;
+        }
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -360,6 +373,12 @@ public class PlayerController : MonoBehaviour
         {
             enemyDamage = enemy.damageDealt;
             TakeDamage(enemyDamage);
+        }
+
+        if (collision.gameObject.tag == "Bandage")
+        {
+            heldBandages += 1;
+            Destroy(collision.gameObject);
         }
 
         if(collision.gameObject.tag == "LevelEnd")
