@@ -205,6 +205,6 @@ MonoBehaviour:
   currentFiremode: 0
   mag: 17
   magSize: 17
-  ammo: 170
+  ammo: 35
   maxAmmo: 1700
-  ammoRefill: 85
+  ammoRefill: 35

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerController player;
     public Weapon weapon;
+    public MachineGun machineGun;
 
     public GameObject pauseMenu;
     public GameObject deathScreen;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI weaponName;
     public TextMeshProUGUI magText;
     public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI bandageText;
 
     public Image healthBar;
     public Image staminaBar;
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
         // initalize everything after the current scene is NOT the main menu
         if(SceneManager.GetActiveScene().buildIndex != 0)
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            player = GameObject.Find("Player").GetComponent<PlayerController>();
             currentLevel = SceneManager.GetActiveScene().buildIndex;
 
             pauseMenu = GameObject.FindGameObjectWithTag("Pause");
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
             weaponName = GameObject.Find("WeaponName").GetComponent<TextMeshProUGUI>();
             magText = GameObject.Find("MagText").GetComponent<TextMeshProUGUI>();
             ammoText = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
+            bandageText = GameObject.Find("BandageText").GetComponent<TextMeshProUGUI>();
 
             healthBar = GameObject.Find("CurrentHealth").GetComponent<Image>();
             staminaBar = GameObject.Find("CurrentStamina").GetComponent<Image>();
@@ -86,7 +89,7 @@ public class GameManager : MonoBehaviour
 
 
             healthBar.fillAmount = (float)player.health / (float)player.maxHealth;
-            staminaBar.fillAmount = (float)player.stamina / (float)player.maxStamina;
+            staminaBar.fillAmount = (float)player.stamina / (float)player.maxStamina; 
 
             if (player.currentWeapon)
             {
@@ -101,6 +104,11 @@ public class GameManager : MonoBehaviour
                 magText.text = "";
                 ammoText.text = "";
             }
+
+            if (player.heldBandages > 0)
+                bandageText.text = "Bandages: " + player.heldBandages;
+            else
+                bandageText.text = "";
         }
     }
 

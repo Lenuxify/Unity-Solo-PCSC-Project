@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 79.5, y: 250}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71745614
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: modern warfare 5
+  m_text: Red Warfare 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1456,12 +1456,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 0}
+  weapon: {fileID: 0}
+  machineGun: {fileID: 0}
   pauseMenu: {fileID: 0}
+  deathScreen: {fileID: 0}
+  overheatUI: {fileID: 0}
   weaponName: {fileID: 0}
   magText: {fileID: 0}
   ammoText: {fileID: 0}
+  overheatText: {fileID: 0}
   healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  overheatBar: {fileID: 0}
   enemyCount: 0
+  currentLevel: 0
   paused: 0
 --- !u!4 &1943157802
 Transform:

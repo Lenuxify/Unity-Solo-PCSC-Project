@@ -167,18 +167,19 @@ MonoBehaviour:
   weaponName: Light Machine Gun
   projLifespan: 1
   projVelocity: 1500
-  reloadCooldown: 3
+  reloadCooldown: 5
   rof: 0.1
   damage: 5
   fireModes: 0
   currentFiremode: 0
   mag: 100
   magSize: 100
-  ammo: 300
+  ammo: 100
   maxAmmo: 500
   ammoRefill: 100
   overheated: 0
   overheatMeter: 0
+  maxOverheat: 100
   overheatRate: 5
   coolingDownRate: 5
   overheatCooldown: 3

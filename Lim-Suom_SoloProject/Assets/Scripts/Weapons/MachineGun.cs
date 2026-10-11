@@ -9,6 +9,7 @@ public class MachineGun : Weapon
     [Header("LMG Exclusive")]
     public bool overheated = false;
     public float overheatMeter = 0;
+    public float maxOverheat = 100;
     public float overheatRate = 10;
     public float coolingDownRate = 5;
     public float overheatCooldown = 3;
@@ -19,7 +20,9 @@ public class MachineGun : Weapon
         fireDirection = Camera.main;
     }
 
-    // Barrel Overheat System, overheat still carries between reloads making continous fire punishing.
+    // Barrel Overheat System, overheat still carries between reloads making continous fire punishing. 
+    // DISABLED, IT KEEPS BREAKING AND I DONT GOT TIME TO FIX THAT DURING BETA PHASE
+    /*
     public void Update()
     {
         if(player.currentWeapon)
@@ -30,6 +33,10 @@ public class MachineGun : Weapon
                 }
                 else
                 {
+                    if(player.heldWeaponID != 3)
+                    { 
+                    }
+
                     if (overheatMeter > 100)
                         overheatMeter = 100;
 
@@ -52,6 +59,7 @@ public class MachineGun : Weapon
                     overheated = false;
                 }
     }
+    */
 
     public new void fire()
     {
@@ -74,14 +82,4 @@ public class MachineGun : Weapon
             if (mag > 0)
                 canFire = true;
     }
-
-    /*
-    IEnumerator Overheat()
-    {
-        yield return new WaitForSeconds(overheatCooldown);
-
-        canFire = true;
-        overheated = false;
-    }
-    */
 }

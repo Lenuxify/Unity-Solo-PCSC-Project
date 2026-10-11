@@ -297,9 +297,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (pickupObj.tag == "Weapon")
                 {
-                    pickupObj.GetComponent<Weapon>().equip(this); // gives playercontroller reference to equip func
-                    heldWeaponID = currentWeapon.weaponID;
-                    Debug.Log("Weapon ID: " +  heldWeaponID);
+                    if(!currentWeapon)
+                    {
+                        pickupObj.GetComponent<Weapon>().equip(this); // gives playercontroller reference to equip func
+                        heldWeaponID = currentWeapon.weaponID;
+                        Debug.Log("Weapon ID: " + heldWeaponID);
+                    }
                 }
             }
         }
@@ -316,6 +319,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Does not work for now
     public void Aim(InputAction.CallbackContext context)
     {
         if (currentWeapon)
@@ -325,9 +329,9 @@ public class PlayerController : MonoBehaviour
 
     public void Heal()
     {
-        if (health < 99 && heldBandages > 0)
+        if (health < 100 && heldBandages > 0)
         {
-            health += 15;
+            health += 30;
             heldBandages--;
 
             if(health > maxHealth)
