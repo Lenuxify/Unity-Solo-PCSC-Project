@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject deathScreen;
+    public GameObject mainMenu;
+    public GameObject settingsMenu;
 
     public TextMeshProUGUI weaponName;
     public TextMeshProUGUI magText;
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public Image healthBar;
     public Image staminaBar;
+    public Image crosshair;
+    public Image toggleSprintButton;
 
     public int enemyCount = 0;
     public int currentLevel;
@@ -30,14 +34,26 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
+        if(currentLevel == 0)
+        {
+            currentLevel = SceneManager.GetActiveScene().buildIndex;
+
+            mainMenu = GameObject.FindGameObjectWithTag("MainMenu");
+            settingsMenu = GameObject.FindGameObjectWithTag("Settings");
+            toggleSprintButton = GameObject.Find("TSprint Button").GetComponent<Image>();
+
+            settingsMenu.SetActive(false);
+        }
+
         // initalize everything after the current scene is NOT the main menu
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        if (currentLevel != 0)
         {
             player = GameObject.Find("Player").GetComponent<PlayerController>();
             currentLevel = SceneManager.GetActiveScene().buildIndex;
 
             pauseMenu = GameObject.FindGameObjectWithTag("Pause");
             deathScreen = GameObject.FindGameObjectWithTag("Death");
+            //settingsMenu = GameObject.FindGameObjectWithTag("Settings");
 
             weaponName = GameObject.Find("WeaponName").GetComponent<TextMeshProUGUI>();
             magText = GameObject.Find("MagText").GetComponent<TextMeshProUGUI>();
@@ -46,21 +62,26 @@ public class GameManager : MonoBehaviour
 
             healthBar = GameObject.Find("CurrentHealth").GetComponent<Image>();
             staminaBar = GameObject.Find("CurrentStamina").GetComponent<Image>();
+            crosshair = GameObject.Find("Crosshair").GetComponent<Image>();
+            //toggleSprintButton = GameObject.Find("TSprint Button").GetComponent<Image>();
+
+            enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
             pauseMenu.SetActive(false);
             deathScreen.SetActive(false);
-
-            enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            //settingsMenu.SetActive(false);
+            crosshair.enabled = true;
         }
     }
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
+        if (currentLevel != 0)
         {
+
             if (player.isDead == true)
             {
                 deathScreen.SetActive(true);
@@ -74,7 +95,9 @@ public class GameManager : MonoBehaviour
 
                 Time.timeScale = 0;
 
-                if(player.isDead == false)
+                crosshair.enabled = false;
+
+                if (player.isDead == false)
                     pauseMenu.SetActive(true);
             }
             else
@@ -83,6 +106,8 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
 
                 Time.timeScale = 1;
+
+                crosshair.enabled = true;
 
                 pauseMenu.SetActive(false);
             }
@@ -96,6 +121,7 @@ public class GameManager : MonoBehaviour
                 weaponName.text = player.currentWeapon.name;
                 magText.text = "Mag: " + player.currentWeapon.mag + "/" + player.currentWeapon.magSize;
                 ammoText.text = "Ammo: " + player.currentWeapon.ammo + "/" + player.currentWeapon.maxAmmo;
+                crosshair.enabled = false;
 
             }
             else
@@ -103,6 +129,9 @@ public class GameManager : MonoBehaviour
                 weaponName.text = "";
                 magText.text = "";
                 ammoText.text = "";
+
+                if (!paused)
+                    crosshair.enabled = true;
             }
 
             if (player.heldBandages > 0)
@@ -117,6 +146,7 @@ public class GameManager : MonoBehaviour
         paused = !paused;
 
         Cursor.visible = paused;
+        crosshair.enabled = !paused;
 
         if(paused)
         {
@@ -149,4 +179,38 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+
+    // Settings Menu Functions
+    public void SettingsMenu()
+    {
+        if(currentLevel == 0)
+            mainMenu.SetActive(false);
+        else
+            pauseMenu.SetActive(false);
+
+        settingsMenu.SetActive(true);
+
+    }
+
+    public void menuBack()
+    {
+        if (currentLevel == 0)
+            mainMenu.SetActive(true);
+        else
+            pauseMenu.SetActive(true);
+
+        settingsMenu.SetActive(false);
+    }
+
+    public void ToggleSprint()
+    {
+        player.toggleSprint = !player.toggleSprint;
+
+        if(player.toggleSprint)
+            toggleSprintButton.color = Color.green;
+        else 
+            toggleSprintButton.color = Color.red;
+    }
+
 }

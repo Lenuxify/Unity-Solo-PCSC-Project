@@ -14,6 +14,8 @@ TagManager:
   - Death
   - Bandage
   - Overheat
+  - Settings
+  - MainMenu
   layers:
   - Default
   - TransparentFX
