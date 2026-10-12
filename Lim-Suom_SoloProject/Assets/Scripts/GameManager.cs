@@ -40,13 +40,13 @@ public class GameManager : MonoBehaviour
 
             mainMenu = GameObject.FindGameObjectWithTag("MainMenu");
             settingsMenu = GameObject.FindGameObjectWithTag("Settings");
-            toggleSprintButton = GameObject.Find("TSprint Button").GetComponent<Image>();
+            //toggleSprintButton = GameObject.Find("TSprint Button").GetComponent<Image>();
 
             settingsMenu.SetActive(false);
         }
 
         // initalize everything after the current scene is NOT the main menu
-        if (currentLevel != 0)
+        if (currentLevel > 0)
         {
             player = GameObject.Find("Player").GetComponent<PlayerController>();
             currentLevel = SceneManager.GetActiveScene().buildIndex;
@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
 
             pauseMenu.SetActive(false);
             deathScreen.SetActive(false);
-            //settingsMenu.SetActive(false);
+            settingsMenu.SetActive(false);
             crosshair.enabled = true;
         }
     }
 
     void Update()
     {
-        if (currentLevel != 0)
+        if (currentLevel > 0)
         {
 
             if (player.isDead == true)
