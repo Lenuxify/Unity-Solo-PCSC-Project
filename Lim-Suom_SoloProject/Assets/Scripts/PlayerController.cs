@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Header("Damage Relationships")]
     public bool isDead = false;
     public bool isAttacking = false;
+    public bool hasHealed = false;
     public bool canTakeEnemyDamage = true;
     public bool tookHazardDamage = false;
     public bool tookEnemyDamage = false;
@@ -235,10 +236,11 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if(Physics.Raycast(jumpRay, jumpDetectDistance))
-        {
-                rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
-        }
+        if (!gameManager.paused)
+            if(Physics.Raycast(jumpRay, jumpDetectDistance))
+            {
+                    rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+            }
     }
 
     public void shoulderSwap()
@@ -329,12 +331,15 @@ public class PlayerController : MonoBehaviour
 
     public void Heal()
     {
-        if (health < 100 && heldBandages > 0)
+        if (health < 100 && heldBandages > 0 && !hasHealed)
         {
+            hasHealed = true;
             health += 30;
             heldBandages--;
+            StartCoroutine("GeneralWait");
 
-            if(health > maxHealth)
+
+            if (health > maxHealth)
                 health = maxHealth;
         }
     }
@@ -479,5 +484,14 @@ public class PlayerController : MonoBehaviour
 
         regenStamina = true;
         staminaStop = false;
+    }
+
+    // because like stupid if statements cant have a wait function, this is general purpose use
+    IEnumerator GeneralWait()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if(hasHealed)
+            hasHealed = false;
     }
 }
