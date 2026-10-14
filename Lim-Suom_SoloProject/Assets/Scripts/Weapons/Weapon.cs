@@ -4,6 +4,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public PlayerController player;
+    AudioSource speaker;
 
     public GameObject projectile;
     public Transform firePoint;
@@ -38,6 +39,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         fireDirection = Camera.main;
+        speaker = GetComponent<AudioSource>();
     }
 
     public void equip(PlayerController p)
@@ -68,6 +70,7 @@ public class Weapon : MonoBehaviour
     {
         if(canFire && !isReloading && mag > 0)
         {
+            speaker.Play();
             GameObject p = Instantiate(projectile, firePoint.position, firePoint.rotation);
             p.GetComponent<Rigidbody>().AddForce(fireDirection.transform.forward * projVelocity); // add force relative to camera direction * velocity
             Destroy(p, projLifespan);

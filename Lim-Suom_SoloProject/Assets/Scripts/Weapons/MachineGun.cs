@@ -14,11 +14,13 @@ public class MachineGun : Weapon
     public float coolingDownRate = 5;
     public float overheatCooldown = 3;
 
+    /*
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         fireDirection = Camera.main;
     }
+    */
 
     // Barrel Overheat System, overheat still carries between reloads making continous fire punishing. 
     // DISABLED, IT KEEPS BREAKING AND I DONT GOT TIME TO FIX THAT DURING BETA PHASE
@@ -61,6 +63,7 @@ public class MachineGun : Weapon
     }
     */
 
+    /*
     public new void fire()
     {
         if(canFire && !isReloading && mag > 0)
@@ -82,4 +85,5 @@ public class MachineGun : Weapon
             if (mag > 0)
                 canFire = true;
     }
+    */
 }
