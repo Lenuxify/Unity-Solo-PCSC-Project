@@ -61,15 +61,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
@@ -142,18 +133,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Zoom In/Out",
-                    "type": "Value",
-                    "id": "da911c51-ee61-4fac-b11a-a6ed75d75e80",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Heal",
                     "type": "Button",
-                    "id": "e117dc55-44c9-4b09-bdde-00ed4df9bfbc",
+                    "id": "612d2cdd-65f9-4e74-b89b-3c6af0e5b8d6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -515,28 +497,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4f4649ac-64a8-4a73-af11-b3faef356a4d",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "36e52cba-0905-478e-a818-f4bfcb9f3b9a",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "61f0d0a9-7011-412d-93ad-2ffaef0d6e78",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
@@ -669,29 +629,7 @@
                 },
                 {
                     "name": "",
-                    "id": "89ee4b84-8f87-4cdb-9869-5fa3b0036d0b",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Zoom In/Out",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f3548be7-c245-474d-9286-8e302b548030",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Zoom In/Out",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "01084613-9b1a-4ebe-816b-65965bdfa92d",
+                    "id": "2781bfe2-525c-43ef-94dc-7b993d353224",
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
@@ -702,7 +640,7 @@
                 },
                 {
                     "name": "",
-                    "id": "313e3a04-7def-4849-8b89-c2d42741843f",
+                    "id": "aec8799f-37fe-4b14-82e1-f1fde0a3f56d",
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",

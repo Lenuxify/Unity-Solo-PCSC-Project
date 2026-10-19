@@ -2637,10 +2637,6 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 523792040}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -2817,10 +2813,6 @@ MonoBehaviour:
     m_ActionId: 5a9140aa-ccf5-4b3b-8430-31e820985a1d
     m_ActionName: 'Player/Scope In[/Mouse/rightButton]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: da911c51-ee61-4fac-b11a-a6ed75d75e80
-    m_ActionName: 'Player/Zoom In/Out[/Mouse/scroll]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 523792040}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -2834,7 +2826,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e117dc55-44c9-4b09-bdde-00ed4df9bfbc
+    m_ActionId: 612d2cdd-65f9-4e74-b89b-3c6af0e5b8d6
     m_ActionName: 'Player/Heal[/Keyboard/g]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
@@ -2855,6 +2847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   isDead: 0
   isAttacking: 0
+  hasHealed: 0
   canTakeEnemyDamage: 1
   tookHazardDamage: 0
   tookEnemyDamage: 0

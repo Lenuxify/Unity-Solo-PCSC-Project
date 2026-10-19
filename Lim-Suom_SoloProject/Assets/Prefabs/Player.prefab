@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 68098402548590013}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -260.55, y: 8.77, z: -76.05}
+  m_LocalPosition: {x: 98.70001, y: 1.5200005, z: 61.699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   isDead: 0
   isAttacking: 0
+  hasHealed: 0
   canTakeEnemyDamage: 1
   tookHazardDamage: 0
   tookEnemyDamage: 0
@@ -272,10 +273,6 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3767121688880983498}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -315,22 +312,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3767121688880983498}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Heal
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3db91f5d-e108-460f-842d-266b3a5880af
-    m_ActionName: 'Player/Heal[/Keyboard/g]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b
@@ -452,11 +433,15 @@ MonoBehaviour:
     m_ActionId: 3b86b5b6-6d41-4d7a-a5de-acbe424da232
     m_ActionName: 'Player/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a9140aa-ccf5-4b3b-8430-31e820985a1d
+    m_ActionName: 'Player/Scope In[/Mouse/rightButton]'
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3767121688880983498}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Aim
-        m_Mode: 0
+        m_MethodName: Heal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -465,12 +450,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 5a9140aa-ccf5-4b3b-8430-31e820985a1d
-    m_ActionName: 'Player/Scope In[/Mouse/rightButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: da911c51-ee61-4fac-b11a-a6ed75d75e80
-    m_ActionName: 'Player/Zoom In/Out[/Mouse/scroll]'
+    m_ActionId: 612d2cdd-65f9-4e74-b89b-3c6af0e5b8d6
+    m_ActionName: 'Player/Heal[/Keyboard/g]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -532,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 8018862184226049397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalPosition: {x: 0.783, y: 0.085, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
