@@ -392,7 +392,11 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.tag == "LevelEnd")
         {
-            gameManager.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            if (gameManager.currentLevel == 3)
+                gameManager.LoadLevel(0);
+
+            gameManager.LoadLevel(gameManager.currentLevel + 1);
+
         }
     }
 
@@ -408,6 +412,7 @@ public class PlayerController : MonoBehaviour
     // If player stays colliding:
     private void OnCollisionStay(Collision collision)
     {
+        /*
         if (collision.gameObject.tag == "Hazard" && !tookHazardDamage)
         {
             hazardContactTime += Time.deltaTime;
@@ -415,6 +420,7 @@ public class PlayerController : MonoBehaviour
             if (hazardContactTime > damageTime)
                 StartCoroutine("HazardDamageCooldown");
         }
+        */
 
         if (collision.gameObject.tag == "Enemy" && !tookEnemyDamage)
         {
@@ -426,7 +432,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnCollisionExit(Collision collision)
-    {
+    {   /*
         if (collision.gameObject.tag == "Hazard")
         {
             /*
@@ -435,9 +441,10 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine("HazardDamageCooldown");
                 tookHazardDamage = false;
             }
-            */
+            
             hazardContactTime = 0;
         }
+        */
         if (collision.gameObject.tag == "Enemy")
         {
             enemyContactTime = 0;

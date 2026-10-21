@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &342653924585075717
+--- !u!1 &467011323358298090
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8027127707846532409}
-  - component: {fileID: 7413910120650659452}
-  - component: {fileID: 4433629755991913177}
-  - component: {fileID: 3647423632930721249}
-  - component: {fileID: 2658489511368789343}
-  - component: {fileID: 6079879427419017480}
-  - component: {fileID: -8290627015138538600}
+  - component: {fileID: 2876299294188437636}
+  - component: {fileID: 6821134149686315278}
+  - component: {fileID: 8617934989426424673}
+  - component: {fileID: 2079097888880182447}
+  - component: {fileID: 1162078071029864015}
+  - component: {fileID: 1013495201581483861}
+  - component: {fileID: -5735458296624171875}
   m_Layer: 0
-  m_Name: Light Machine Gun
+  m_Name: Alpha Sniper
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8027127707846532409
+--- !u!4 &2876299294188437636
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: -257.1177, y: 1.5000002, z: -64.16408}
-  m_LocalScale: {x: 0.36476925, y: 0.44224, z: 0.8770649}
+  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: -258.8743, y: 1.5, z: -64.07437}
+  m_LocalScale: {x: 0.18238463, y: 0.27072164, z: 1.8513962}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5061392248663308529}
+  - {fileID: 5582243812070167230}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!33 &7413910120650659452
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!33 &6821134149686315278
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4433629755991913177
+--- !u!23 &8617934989426424673
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -95,13 +95,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3647423632930721249
+--- !u!65 &2079097888880182447
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -116,13 +116,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2658489511368789343
+--- !u!54 &1162078071029864015
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -143,59 +143,53 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &6079879427419017480
+--- !u!114 &1013495201581483861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 442f30781b8a448488ef67f81c5185fa, type: 3}
+  m_Script: {fileID: 11500000, guid: fc1ac8b561bbcbf4d87ba38b13fcbd8c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MachineGun
+  m_EditorClassIdentifier: Assembly-CSharp::Sniper
   player: {fileID: 0}
-  projectile: {fileID: 6895579047648711126, guid: 13982c671916275448b33a3aec59bb15, type: 3}
-  firePoint: {fileID: 5061392248663308529}
+  projectile: {fileID: 8203412276696064105, guid: ac9ce58331a29cd4fb28bf6e5147bf06, type: 3}
+  firePoint: {fileID: 5582243812070167230}
   fireDirection: {fileID: 0}
   canFire: 1
-  holdToAttack: 1
+  holdToAttack: 0
   isReloading: 0
-  Aimable: 0
+  Aimable: 1
   heavy: 1
-  weaponID: 3
-  weaponName: Light Machine Gun
+  weaponID: 2
+  weaponName: Sniper Rifle
   projLifespan: 1
-  projVelocity: 1500
-  reloadCooldown: 5
-  rof: 0.1
-  damage: 10
+  projVelocity: 1750
+  reloadCooldown: 4
+  rof: 2
+  damage: 100
   fireModes: 0
   currentFiremode: 0
-  mag: 100
-  magSize: 100
-  ammo: 100
-  maxAmmo: 500
-  ammoRefill: 100
-  overheated: 0
-  overheatMeter: 0
-  maxOverheat: 100
-  overheatRate: 5
-  coolingDownRate: 5
-  overheatCooldown: 3
---- !u!82 &-8290627015138538600
+  mag: 7
+  magSize: 7
+  ammo: 14
+  maxAmmo: 700
+  ammoRefill: 14
+--- !u!82 &-5735458296624171875
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342653924585075717}
+  m_GameObject: {fileID: 467011323358298090}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 796dc993286c7f64c999c2359f21335a, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9a7ba761acef79a4daae441b931db5dc, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -281,7 +275,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &7976986969686694942
+--- !u!1 &817848882723019251
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,26 +283,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5061392248663308529}
+  - component: {fileID: 5582243812070167230}
   m_Layer: 0
-  m_Name: LMGFirePoint
+  m_Name: SniperFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5061392248663308529
+--- !u!4 &5582243812070167230
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7976986969686694942}
+  m_GameObject: {fileID: 817848882723019251}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.009155837, y: 0.30978617, z: 0.5156288}
   m_LocalScale: {x: 5.4829187, y: 4.522431, z: 1.1401664}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8027127707846532409}
+  m_Father: {fileID: 2876299294188437636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
