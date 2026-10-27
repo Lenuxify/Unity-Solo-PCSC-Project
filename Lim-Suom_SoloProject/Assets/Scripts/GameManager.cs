@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
             settingsMenu = GameObject.FindGameObjectWithTag("Settings");
             //toggleSprintButton = GameObject.Find("TSprint Button").GetComponent<Image>();
 
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             settingsMenu.SetActive(false);
         }
 

@@ -100,6 +100,19 @@ public class PlayerController : MonoBehaviour
         jumpRay = new Ray(transform.position, -transform.up);
         interactRay = new Ray(playerCam.transform.position, transform.forward);
 
+        if(Physics.Raycast(interactRay, out interactHit, interactDistance))
+        {
+            pickupObj = null;
+            if (interactHit.collider.tag == "Weapon")
+            {
+                pickupObj = interactHit.collider.gameObject;
+            }
+            else
+            {
+                pickupObj = null;
+            }
+        }
+
         weaponSlot = transform.GetChild(0);
 
         Cursor.visible = false;
@@ -392,7 +405,7 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.tag == "LevelEnd")
         {
-            if (gameManager.currentLevel == 3)
+            if (gameManager.currentLevel == 4)
                 gameManager.LoadLevel(0);
 
             gameManager.LoadLevel(gameManager.currentLevel + 1);
@@ -496,7 +509,7 @@ public class PlayerController : MonoBehaviour
     // because like stupid if statements cant have a wait function, this is general purpose use
     IEnumerator GeneralWait()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1);
 
         if(hasHealed)
             hasHealed = false;
