@@ -166,7 +166,7 @@ MonoBehaviour:
   heavy: 0
   weaponID: 1
   weaponName: Rifle
-  projLifespan: 0.5
+  projLifespan: 0.3
   projVelocity: 1500
   reloadCooldown: 2
   rof: 0.1

@@ -166,7 +166,7 @@ MonoBehaviour:
   heavy: 1
   weaponID: 2
   weaponName: Sniper Rifle
-  projLifespan: 1
+  projLifespan: 0.3
   projVelocity: 1750
   reloadCooldown: 4
   rof: 2

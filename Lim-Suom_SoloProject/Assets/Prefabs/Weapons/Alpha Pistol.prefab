@@ -197,7 +197,7 @@ MonoBehaviour:
   heavy: 0
   weaponID: 0
   weaponName: Pistol
-  projLifespan: 1.5
+  projLifespan: 0.75
   projVelocity: 1000
   reloadCooldown: 0.5
   rof: 0.2

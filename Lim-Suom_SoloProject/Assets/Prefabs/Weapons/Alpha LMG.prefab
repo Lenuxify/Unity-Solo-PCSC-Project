@@ -166,7 +166,7 @@ MonoBehaviour:
   heavy: 1
   weaponID: 3
   weaponName: Light Machine Gun
-  projLifespan: 1
+  projLifespan: 0.3
   projVelocity: 1500
   reloadCooldown: 5
   rof: 0.1
