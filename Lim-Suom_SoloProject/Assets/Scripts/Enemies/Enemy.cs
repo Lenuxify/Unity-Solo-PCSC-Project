@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if(health <= 0)
-            // set enemy count -- towards game manager
             Destroy(gameObject);
 
         // Find difference between player position and enemy position
@@ -36,8 +35,13 @@ public class Enemy : MonoBehaviour
 
         isFollowing = targetDistance <= detectionRange;
 
-        // Follow player 
-        if(health > 0)
+        // Follow player when attacked
+        if (health > 0)
+            if (health < maxHealth)
+                agent.destination = player.transform.position;
+
+        // Follow player when in detection range
+        if (health > 0)
             if(isFollowing)
             {
                 agent.destination = player.transform.position;

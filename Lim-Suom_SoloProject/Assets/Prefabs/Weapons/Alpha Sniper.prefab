@@ -166,18 +166,18 @@ MonoBehaviour:
   heavy: 1
   weaponID: 2
   weaponName: Sniper Rifle
-  projLifespan: 0.3
+  projLifespan: 0.5
   projVelocity: 1750
   reloadCooldown: 4
   rof: 2
   damage: 100
   fireModes: 0
   currentFiremode: 0
-  mag: 7
-  magSize: 7
-  ammo: 14
-  maxAmmo: 14
-  ammoRefill: 7
+  mag: 5
+  magSize: 5
+  ammo: 10
+  maxAmmo: 10
+  ammoRefill: 5
 --- !u!82 &-5735458296624171875
 AudioSource:
   m_ObjectHideFlags: 0

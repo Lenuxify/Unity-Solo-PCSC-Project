@@ -170,7 +170,7 @@ MonoBehaviour:
   projVelocity: 1500
   reloadCooldown: 2
   rof: 0.1
-  damage: 10
+  damage: 5
   fireModes: 2
   currentFiremode: 1
   mag: 30
