@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 2;
 
     public PlayerController player;
+    public GameManager gameManager;
     public NavMeshAgent agent;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -35,17 +37,20 @@ public class Enemy : MonoBehaviour
 
         isFollowing = targetDistance <= detectionRange;
 
-        // Follow player when attacked
         if (health > 0)
-            if (health < maxHealth)
-                agent.destination = player.transform.position;
+            if (gameManager.currentLevel == 1)
+                agent.isStopped = true;
+            else
+                // Follow player when attacked
+                if (health < maxHealth)
+                        agent.destination = player.transform.position;
 
-        // Follow player when in detection range
-        if (health > 0)
-            if(isFollowing)
-            {
-                agent.destination = player.transform.position;
-            }
+                // Follow player when in detection range
+                if (health > 0)
+                    if(isFollowing)
+                    {
+                        agent.destination = player.transform.position;
+                    }
     }
 
     public void OnCollisionEnter(Collision collision)
